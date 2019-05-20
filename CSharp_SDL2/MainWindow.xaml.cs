@@ -62,8 +62,10 @@ namespace CSharp_SDL2
                     else
                         dAmplitude -= dSmoothingFactor;
                 }
-
-                ((short*)stream)[i] = (short)(Math.Sin(440.0 * 6.28318530 * dTime) * 32767.0 * dAmplitude);
+                checked
+                {
+                    ((short*)stream)[i] = (short)(Math.Sin(440.0 * 6.28318530 * dTime) * 32767.0 * dAmplitude);
+                }
                 dTime += 1.0 / 41000.0;
             }
         }

@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharp_SDL2", "CSharp_SDL2\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotNET_Audio", "dotNET_Audio\dotNET_Audio.csproj", "{3A565E6C-59F4-475D-91BB-9E02B05A2A3E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioPlayer", "AudioPlayer\AudioPlayer.csproj", "{F73CD169-B5EB-4624-A0A3-951E31CAF01B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFMusicPlayer", "AudioPlayer\WPFMusicPlayer.csproj", "{F73CD169-B5EB-4624-A0A3-951E31CAF01B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

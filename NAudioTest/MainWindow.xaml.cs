@@ -31,13 +31,22 @@ namespace NAudioTest
         private void PlayButton_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog open = new OpenFileDialog();
-            open.Filter = "MP3 File (*.mp3)|*.mp3;";
+            open.Filter = "MP3 File (*.mp3;*.wav)|*.mp3;*.wav;";
             if (open.ShowDialog() != true) return;
 
             DisposeWave();
 
-            NAudio.Wave.WaveStream pcm = NAudio.Wave.WaveFormatConversionStream.CreatePcmStream(new NAudio.Wave.Mp3FileReader(open.FileName));
-            stream = new NAudio.Wave.BlockAlignReductionStream(pcm);
+            if (open.FileName.EndsWith(".mp3"))
+            {
+                NAudio.Wave.WaveStream pcm = NAudio.Wave.WaveFormatConversionStream.CreatePcmStream(new NAudio.Wave.Mp3FileReader(open.FileName));
+                stream = new NAudio.Wave.BlockAlignReductionStream(pcm);
+            }
+            else if (open.FileName.EndsWith(".wav"))
+            {
+                NAudio.Wave.WaveStream pcm = new NAudio.Wave.WaveChannel32(new NAudio.Wave.WaveFileReader(open.FileName));
+                stream = new NAudio.Wave.BlockAlignReductionStream(pcm);
+            }
+            else throw new InvalidOperationException("Not correct audio file type.");
             output = new NAudio.Wave.DirectSoundOut();
             output.Init(new NAudio.Wave.WaveChannel32(stream));
             output.Play();

@@ -26,19 +26,20 @@ namespace NAudioTest
             InitializeComponent();
         }
 
-        private NAudio.Wave.WaveFileReader wave = null;
+        private NAudio.Wave.BlockAlignReductionStream stream= null;
         private NAudio.Wave.DirectSoundOut output = null;
         private void PlayButton_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog open = new OpenFileDialog();
-            open.Filter = "Wave File (*.wav)|*.wav;";
+            open.Filter = "MP3 File (*.mp3)|*.mp3;";
             if (open.ShowDialog() != true) return;
 
             DisposeWave();
 
-            wave = new NAudio.Wave.WaveFileReader(open.FileName);
+            NAudio.Wave.WaveStream pcm = NAudio.Wave.WaveFormatConversionStream.CreatePcmStream(new NAudio.Wave.Mp3FileReader(open.FileName));
+            stream = new NAudio.Wave.BlockAlignReductionStream(pcm);
             output = new NAudio.Wave.DirectSoundOut();
-            output.Init(new NAudio.Wave.WaveChannel32(wave));
+            output.Init(new NAudio.Wave.WaveChannel32(stream));
             output.Play();
 
             PauseButton.IsEnabled = true;
@@ -61,10 +62,10 @@ namespace NAudioTest
                 output.Dispose();
                 output = null;
             }
-            if (wave != null)
+            if (stream != null)
             {
-                wave.Dispose();
-                wave = null;
+                stream.Dispose();
+                stream = null;
             }
         }
 

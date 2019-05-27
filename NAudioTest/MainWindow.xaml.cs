@@ -68,7 +68,7 @@ namespace NAudioTest
         {
             if (output != null)
             {
-                if (output.PlaybackState == NAudio.Wave.PlaybackState.Playing) output.Stop();
+                if (output.PlaybackState == PlaybackState.Playing) output.Stop();
                 output.Dispose();
                 output = null;
             }
@@ -101,6 +101,56 @@ namespace NAudioTest
                     WaveFileWriter.CreateWaveFile(save.FileName, pcm);
                 }
             }
+        }
+
+        public class WaveTone : WaveStream
+        {
+            private double frequency;
+            private double amplitude;
+            private double time;
+
+            public WaveTone(double f, double a)
+            {
+                this.time = 0.0;
+                this.frequency = f;
+                this.amplitude = a;
+            }
+
+            public override long Position { get; set; }
+
+            public override long Length => long.MaxValue;
+
+            public override WaveFormat WaveFormat => new WaveFormat(44100, 16, 1);
+
+            public override int Read(byte[] buffer, int offset, int count)
+            {
+                int samples = count / 2;
+                for (int i = 0; i < samples; i++)
+                {
+                    double sine = amplitude * Math.Sin(Math.PI * 2 * frequency * time);
+                    time += 1.0 / 44100.0;
+                    short truncated = (short)Math.Round(sine * (Math.Pow(2, 15) - 1));
+                    buffer[i * 2] = (byte)(truncated & 0x00ff);
+                    buffer[i * 2 + 1] = (byte)((truncated & 0xff00) >> 8);
+                }
+
+                return count;
+            }
+        }
+
+        private void StartToneButton_Click(object sender, RoutedEventArgs e)
+        {
+            WaveTone tone = new WaveTone(1000, 0.1);
+            stream = new BlockAlignReductionStream(tone);
+
+            output = new DirectSoundOut();
+            output.Init(stream);
+            output.Play();
+        }
+
+        private void StopToneButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (output != null) output.Stop();
         }
     }
 }

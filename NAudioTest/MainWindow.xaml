@@ -7,8 +7,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" Closed="Window_Closed">
     <Grid>
-        <Button x:Name="PlayButton" Content="Open" HorizontalAlignment="Left" Margin="262,131,0,0" VerticalAlignment="Top" Width="75" Click="PlayButton_Click"/>
-        <Button x:Name="PauseButton" Content="Play/Pause" HorizontalAlignment="Left" Margin="288,229,0,0" VerticalAlignment="Top" Width="75" Click="PauseButton_Click" IsEnabled="False"/>
+        <Button x:Name="PlayButton" Content="Open" HorizontalAlignment="Left" Margin="28,25,0,0" VerticalAlignment="Top" Width="163" Click="PlayButton_Click"/>
+        <Button x:Name="PauseButton" Content="Play/Pause" HorizontalAlignment="Left" Margin="28,50,0,0" VerticalAlignment="Top" Width="163" Click="PauseButton_Click" IsEnabled="False"/>
+        <Button x:Name="ConvertButton" Content="Convert MP3 to Wave" HorizontalAlignment="Left" Margin="28,75,0,0" VerticalAlignment="Top" Width="163" Click="ConvertButton_Click"/>
 
     </Grid>
 </Window>

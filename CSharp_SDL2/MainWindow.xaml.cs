@@ -15,7 +15,6 @@ namespace CSharp_SDL2
         public MainWindow()
         {
             InitializeComponent();
-
             if (SDL.SDL_Init(SDL.SDL_INIT_AUDIO) < 0)
                 Console.WriteLine("SDL Failed to Initilize!!!");
 
@@ -35,7 +34,7 @@ namespace CSharp_SDL2
 
         private double dTime = 0.0;
         private double dAmpSlider = 0.5;
-        private double dAmplitude = 0.5;
+        private double dAmplitude = 0.0;
         private const double dSmoothingFactor = 0.0001;
 
         private unsafe void MyAudioCallback(IntPtr userdata, IntPtr stream, int streamLength)
@@ -55,6 +54,15 @@ namespace CSharp_SDL2
             SDL.SDL_LockAudioDevice(device);
             dAmpSlider = e.NewValue;
             SDL.SDL_UnlockAudioDevice(device);
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
+            SDL.SDL_LockAudioDevice(device);
+            dAmpSlider = 0.0;
+            SDL.SDL_UnlockAudioDevice(device);
+            SDL.SDL_Delay(120);
         }
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CSharp_SDL2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" Closing="Window_Closing">
     <Grid>
         <Slider x:Name="AmpSlider" HorizontalAlignment="Left" Margin="259,46,0,0" VerticalAlignment="Top" Height="261" Width="130" Maximum="1.0" Orientation="Vertical" Value="0.5" ValueChanged="AmpSlider_ValueChanged" TickPlacement="BottomRight" TickFrequency="0.1" LargeChange="0.01" SmallChange="0.001"/>
 

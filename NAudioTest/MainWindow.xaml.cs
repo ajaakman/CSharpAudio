@@ -40,15 +40,17 @@ namespace NAudioTest
             if (open.FileName.EndsWith(".mp3"))
             {
                 WaveStream pcm = WaveFormatConversionStream.CreatePcmStream(new Mp3FileReader(open.FileName));
-                stream = new BlockAlignReductionStream(pcm);
+                EffectStream effect = new EffectStream(pcm);
+                stream = new BlockAlignReductionStream(effect);
             }
             else if (open.FileName.EndsWith(".wav"))
             {
                 WaveStream pcm = new WaveChannel32(new WaveFileReader(open.FileName));
-                stream = new BlockAlignReductionStream(pcm);
+                EffectStream effect = new EffectStream(pcm);
+                stream = new BlockAlignReductionStream(effect);
             }
             else throw new InvalidOperationException("Not correct audio file type.");
-            output = new DirectSoundOut();
+            output = new DirectSoundOut(200);
             output.Init(new WaveChannel32(stream));
             output.Play();
 

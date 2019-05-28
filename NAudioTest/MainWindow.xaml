@@ -12,6 +12,7 @@
         <Button x:Name="ConvertButton" Content="Convert MP3 to Wave" HorizontalAlignment="Left" Margin="28,75,0,0" VerticalAlignment="Top" Width="163" Click="ConvertButton_Click"/>
         <Button x:Name="StartToneButton" Content="Start Tone" HorizontalAlignment="Left" Margin="28,100,0,0" VerticalAlignment="Top" Width="163" Click="StartToneButton_Click"/>
         <Button x:Name="StopToneButton" Content="Stop Tone" HorizontalAlignment="Left" Margin="28,125,0,0" VerticalAlignment="Top" Width="163" Click="StopToneButton_Click"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="28,150,0,0" VerticalAlignment="Top" Width="163"/>
 
     </Grid>
 </Window>

@@ -4,8 +4,7 @@ using NAudio.Wave;
 namespace NAudioTest
 {
     class EffectStream : WaveStream
-    {
-        
+    {        
         public WaveStream SourceStream { get; set; }
 
         public EffectStream(WaveStream stream)

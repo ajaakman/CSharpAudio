@@ -29,6 +29,7 @@ namespace NAudioTest
 
         private BlockAlignReductionStream stream= null;
         private DirectSoundOut output = null;
+
         private void PlayButton_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog open = new OpenFileDialog();
@@ -153,6 +154,69 @@ namespace NAudioTest
         private void StopToneButton_Click(object sender, RoutedEventArgs e)
         {
             if (output != null) output.Stop();
+        }
+
+        private void RefreshSourcesButton_Click(object sender, RoutedEventArgs e)
+        {
+            List<WaveInCapabilities> sources = new List<WaveInCapabilities>();
+            for (int i = 0; i < WaveIn.DeviceCount; i++)
+            {
+                sources.Add(WaveIn.GetCapabilities(i));
+            }
+
+            SourcesList.Items.Clear();
+
+            foreach (var source in sources)
+            {
+                ListViewItem item = new ListViewItem();
+                item.Content = source.ProductName;
+                
+                SourcesList.Items.Add(item);
+            }
+        }
+
+        private WaveIn sourceStream = null;
+        private DirectSoundOut waveOut = null;
+
+        private void StartSourcesButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (SourcesList.Items.Count == 0) return;
+
+            Console.WriteLine("Recording...");
+
+            sourceStream = new WaveIn();
+            sourceStream.DeviceNumber = 0;
+            sourceStream.WaveFormat = new WaveFormat(44100, WaveIn.GetCapabilities(0).Channels);
+
+            WaveInProvider waveIn = new WaveInProvider(sourceStream);
+
+            waveOut = new DirectSoundOut();
+            waveOut.Init(waveIn);
+
+            sourceStream.StartRecording();
+            waveOut.Play();
+        }
+
+        private void StopSourcesButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (waveOut != null)
+            {
+                waveOut.Stop();
+                waveOut.Dispose();
+                waveOut = null;
+            }
+            if (sourceStream != null)
+            {
+                sourceStream.StopRecording();
+                sourceStream.Dispose();
+                sourceStream = null;
+            }
+        }
+
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            StopSourcesButton_Click(sender, e);
+            this.Close();
         }
     }
 }

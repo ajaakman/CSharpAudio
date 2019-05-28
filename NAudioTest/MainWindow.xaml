@@ -7,12 +7,17 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" Closed="Window_Closed">
     <Grid>
-        <Button x:Name="PlayButton" Content="Open" HorizontalAlignment="Left" Margin="28,25,0,0" VerticalAlignment="Top" Width="163" Click="PlayButton_Click"/>
-        <Button x:Name="PauseButton" Content="Play/Pause" HorizontalAlignment="Left" Margin="28,50,0,0" VerticalAlignment="Top" Width="163" Click="PauseButton_Click" IsEnabled="False"/>
-        <Button x:Name="ConvertButton" Content="Convert MP3 to Wave" HorizontalAlignment="Left" Margin="28,75,0,0" VerticalAlignment="Top" Width="163" Click="ConvertButton_Click"/>
-        <Button x:Name="StartToneButton" Content="Start Tone" HorizontalAlignment="Left" Margin="28,100,0,0" VerticalAlignment="Top" Width="163" Click="StartToneButton_Click"/>
-        <Button x:Name="StopToneButton" Content="Stop Tone" HorizontalAlignment="Left" Margin="28,125,0,0" VerticalAlignment="Top" Width="163" Click="StopToneButton_Click"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="28,150,0,0" VerticalAlignment="Top" Width="163"/>
+        <Button x:Name="PlayButton" Content="Open" HorizontalAlignment="Left" Margin="28,25,0,0" VerticalAlignment="Top" Width="256" Click="PlayButton_Click"/>
+        <Button x:Name="PauseButton" Content="Play/Pause" HorizontalAlignment="Left" Margin="28,50,0,0" VerticalAlignment="Top" Width="256" Click="PauseButton_Click" IsEnabled="False"/>
+        <Button x:Name="ConvertButton" Content="Convert MP3 to Wave" HorizontalAlignment="Left" Margin="28,75,0,0" VerticalAlignment="Top" Width="256" Click="ConvertButton_Click"/>
+        <Button x:Name="StartToneButton" Content="Start Tone" HorizontalAlignment="Left" Margin="28,100,0,0" VerticalAlignment="Top" Width="256" Click="StartToneButton_Click"/>
+        <Button x:Name="StopToneButton" Content="Stop Tone" HorizontalAlignment="Left" Margin="28,125,0,0" VerticalAlignment="Top" Width="256" Click="StopToneButton_Click"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="28,150,0,0" VerticalAlignment="Top" Width="256"/>
+        <Button x:Name="RefreshSourcesButton" Content="Refresh Sources" HorizontalAlignment="Left" Margin="515,25,0,0" VerticalAlignment="Top" Width="143" Click="RefreshSourcesButton_Click"/>
+        <Button x:Name="StartSourcesButton" Content="Start" HorizontalAlignment="Left" Margin="515,50,0,0" VerticalAlignment="Top" Width="143" Click="StartSourcesButton_Click"/>
+        <Button x:Name="StopSourcesButton" Content="Stop" HorizontalAlignment="Left" Margin="515,75,0,0" VerticalAlignment="Top" Width="143" Click="StopSourcesButton_Click"/>
+        <Button x:Name="ExitButton" Content="Exit" HorizontalAlignment="Left" Margin="515,100,0,0" VerticalAlignment="Top" Width="143" Click="ExitButton_Click"/>
+        <ListBox x:Name="SourcesList" HorizontalAlignment="Left" Height="100" Margin="28,175,0,0" VerticalAlignment="Top" Width="256"/>
 
     </Grid>
 </Window>

@@ -177,13 +177,12 @@ namespace NAudioTest
 
         private WaveIn sourceStream = null;
         private DirectSoundOut waveOut = null;
+        private WaveFileWriter waveWriter = null;
 
         private void StartSourcesButton_Click(object sender, RoutedEventArgs e)
         {
             if (SourcesList.Items.Count == 0) return;
-
-            Console.WriteLine("Recording...");
-
+            
             sourceStream = new WaveIn();
             sourceStream.DeviceNumber = 0;
             sourceStream.WaveFormat = new WaveFormat(44100, WaveIn.GetCapabilities(0).Channels);
@@ -211,6 +210,11 @@ namespace NAudioTest
                 sourceStream.Dispose();
                 sourceStream = null;
             }
+            if (waveWriter != null)
+            {
+                waveWriter.Dispose();
+                waveWriter = null;
+            }
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
@@ -218,5 +222,31 @@ namespace NAudioTest
             StopSourcesButton_Click(sender, e);
             this.Close();
         }
+
+        private void ToWaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (SourcesList.Items.Count == 0) return;
+
+            SaveFileDialog save = new SaveFileDialog();
+            save.Filter = "Wave File (*.wav)|*.wav;";
+            if (save.ShowDialog() != true) return;
+
+            sourceStream = new WaveIn();
+            sourceStream.DeviceNumber = 0;
+            sourceStream.WaveFormat = new WaveFormat(44100, WaveIn.GetCapabilities(0).Channels);
+
+            sourceStream.DataAvailable += new EventHandler<WaveInEventArgs>(sourceStream_DataAvailable);
+            waveWriter = new WaveFileWriter(save.FileName, sourceStream.WaveFormat);
+
+            sourceStream.StartRecording();
+        }
+
+        private void sourceStream_DataAvailable(object sender, WaveInEventArgs e)
+        {
+            if (waveWriter == null) return;
+            waveWriter.Write(e.Buffer, 0, e.BytesRecorded);
+            waveWriter.Flush();
+        }
+
     }
 }

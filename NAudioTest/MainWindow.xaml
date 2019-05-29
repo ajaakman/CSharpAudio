@@ -15,9 +15,10 @@
         <Button Content="Button" HorizontalAlignment="Left" Margin="28,150,0,0" VerticalAlignment="Top" Width="256"/>
         <Button x:Name="RefreshSourcesButton" Content="Refresh Sources" HorizontalAlignment="Left" Margin="515,25,0,0" VerticalAlignment="Top" Width="143" Click="RefreshSourcesButton_Click"/>
         <Button x:Name="StartSourcesButton" Content="Start" HorizontalAlignment="Left" Margin="515,50,0,0" VerticalAlignment="Top" Width="143" Click="StartSourcesButton_Click"/>
-        <Button x:Name="StopSourcesButton" Content="Stop" HorizontalAlignment="Left" Margin="515,75,0,0" VerticalAlignment="Top" Width="143" Click="StopSourcesButton_Click"/>
-        <Button x:Name="ExitButton" Content="Exit" HorizontalAlignment="Left" Margin="515,100,0,0" VerticalAlignment="Top" Width="143" Click="ExitButton_Click"/>
+        <Button x:Name="StopSourcesButton" Content="Stop" HorizontalAlignment="Left" Margin="515,125,0,0" VerticalAlignment="Top" Width="143" Click="StopSourcesButton_Click"/>
+        <Button x:Name="ExitButton" Content="Exit" HorizontalAlignment="Left" Margin="515,150,0,0" VerticalAlignment="Top" Width="143" Click="ExitButton_Click"/>
         <ListBox x:Name="SourcesList" HorizontalAlignment="Left" Height="100" Margin="28,175,0,0" VerticalAlignment="Top" Width="256"/>
+        <Button x:Name="ToWaveButton" Content="Save To Wave" HorizontalAlignment="Left" Margin="515,85,0,0" VerticalAlignment="Top" Width="143" Click="ToWaveButton_Click"/>
 
     </Grid>
 </Window>
